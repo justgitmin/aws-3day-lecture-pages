@@ -1,0 +1,27 @@
+.card,.hero li,.navlesson,.tools button{transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.card:hover,.hero li:hover{transform:translateY(-3px);border-color:#ffb84d}
+.presenting .slide.current{animation:slideIn .28s ease both}
+@keyframes slideIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.card,.hero li,.navlesson,.tools button{transition:none}.presenting .slide.current{animation:none}}
+.visual-card .visual-icon,.diagram-node .visual-icon,.az-card .visual-icon,.bucket-shell .visual-icon{transition:transform .28s ease,box-shadow .28s ease}
+.visual-card:hover .visual-icon,.diagram-node:hover .visual-icon,.az-card:hover .visual-icon{transform:translateY(-4px) rotate(-2deg);box-shadow:0 12px 24px rgba(255,153,0,.18)}
+.presenting .slide.current .visual-card{--card-delay:0s}.presenting .slide.current .visual-card:nth-child(2){--card-delay:.08s}.presenting .slide.current .visual-card:nth-child(3){--card-delay:.16s}.presenting .slide.current .visual-card:nth-child(4){--card-delay:.24s}.presenting .slide.current .visual-card:nth-child(5){--card-delay:.32s}.presenting .slide.current .visual-card:nth-child(6){--card-delay:.40s}
+.presenting .slide.current .visual-card .metric{animation:nameIn .34s var(--card-delay) both}
+.presenting .slide.current .visual-card .card-icon{animation:iconPop .56s calc(var(--card-delay) + .22s) cubic-bezier(.2,.9,.25,1.25) both}
+.presenting .slide.current .visual-card h3,.presenting .slide.current .visual-card p{animation:copyIn .42s calc(var(--card-delay) + .56s) both}
+.presenting .slide.current .visual-stage .diagram-node,.presenting .slide.current .visual-stage .region-title,.presenting .slide.current .visual-stage .traffic-source,.presenting .slide.current .visual-stage .bucket-shell{animation:nodeIn .55s .12s both}
+.presenting .slide.current .visual-stage .diagram-node:nth-child(3){animation-delay:.42s}.presenting .slide.current .visual-stage .diagram-node:nth-child(5){animation-delay:.72s}.presenting .slide.current .visual-stage .diagram-node:nth-child(7){animation-delay:1.02s}
+.presenting .slide.current .visual-stage .diagram-arrow,.presenting .slide.current .visual-stage .route-line{animation:arrowIn .34s .32s both}.presenting .slide.current .visual-stage .diagram-arrow:nth-child(4),.presenting .slide.current .visual-stage .route-line:nth-child(4){animation-delay:.62s}.presenting .slide.current .visual-stage .route-line:nth-child(6){animation-delay:.92s}
+.presenting .slide.current .az-grid .az-card{animation:nodeIn .5s .34s both}.presenting .slide.current .az-grid .az-card:nth-child(2){animation-delay:.52s}.presenting .slide.current .az-grid .az-card:nth-child(3){animation-delay:.70s}
+.presenting .slide.current .az-link i{animation:networkMove 1.2s .9s linear infinite}
+.presenting .slide.current .traffic-split{animation:nameIn .4s .38s both}.presenting .slide.current .ha-targets .failed{animation:nodeIn .5s .65s both}.presenting .slide.current .ha-targets .healthy{animation:nodeIn .5s .85s both}.presenting .slide.current .service-state{animation:statusIn .5s 1.15s both}
+.presenting .slide.current .object-stack article{animation:copyIn .42s .45s both}.presenting .slide.current .object-stack article:nth-child(2){animation-delay:.62s}.presenting .slide.current .object-stack article:nth-child(3){animation-delay:.79s}
+.presenting .slide.current .ha-targets .healthy .visual-icon{animation:softPulse 1.8s 1.25s ease-in-out infinite}
+@keyframes nameIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes iconPop{0%{opacity:0;transform:scale(.55) rotate(-12deg)}70%{opacity:1;transform:scale(1.08) rotate(2deg)}100%{opacity:1;transform:none}}
+@keyframes copyIn{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:none}}
+@keyframes nodeIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes arrowIn{from{opacity:0;transform:scaleX(.25)}to{opacity:1;transform:none}}
+@keyframes statusIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+@keyframes softPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,153,0,.18)}50%{box-shadow:0 0 0 12px rgba(255,153,0,0)}}
+@keyframes networkMove{from{background-position:0 0}to{background-position:30px 0}}
