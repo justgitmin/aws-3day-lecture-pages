@@ -1,0 +1,909 @@
+/* 발표용 시각 자료: 일반 카드는 중립, 의미가 있는 상태만 색으로 구분 */
+.card.accent,
+.card.dark {
+  background: var(--paper);
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.card.dark p {
+  color: var(--muted);
+}
+
+.visual-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  border: 1px solid color-mix(in srgb, var(--orange) 42%, var(--line));
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--orange) 10%, var(--paper));
+  color: var(--orange);
+}
+
+.visual-icon svg {
+  display: block;
+  width: 42px;
+  height: 42px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.visual-card {
+  position: relative;
+  min-height: 206px;
+  display: grid;
+  grid-template-columns: 1fr 72px;
+  grid-template-areas:
+    "metric icon"
+    "title icon"
+    "copy copy";
+  align-content: start;
+  column-gap: 16px;
+}
+
+.visual-card .metric {
+  grid-area: metric;
+  align-self: center;
+}
+
+.visual-card .card-icon {
+  grid-area: icon;
+  width: 68px;
+  height: 68px;
+}
+
+.visual-card h3 {
+  grid-area: title;
+}
+
+.visual-card p {
+  grid-area: copy;
+  margin-top: 9px;
+}
+
+.visual-stage {
+  position: relative;
+  margin: 25px 0;
+  padding: clamp(22px, 3vw, 36px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--blue) 5%, var(--paper)), var(--paper));
+}
+
+.diagram-node {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--paper);
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(17, 24, 39, .06);
+}
+
+.diagram-node .visual-icon {
+  width: 72px;
+  height: 72px;
+}
+
+.diagram-node b {
+  font-size: 20px;
+}
+
+.diagram-node small,
+.az-card small,
+.region-title small,
+.bucket-shell small,
+.object-stack small {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.diagram-node.selected {
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.diagram-arrow {
+  display: grid;
+  place-items: center;
+  color: var(--orange);
+  font-size: 32px;
+  font-weight: 950;
+}
+
+.infra-zoom,
+.service-route {
+  display: grid;
+  grid-template-columns: 1fr 54px 1fr 54px 1fr;
+  align-items: stretch;
+  gap: 7px;
+}
+
+.region-criteria {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.region-criteria span,
+.concept-key span {
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--soft);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.region-criteria b,
+.concept-key b {
+  display: block;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.az-visual {
+  padding-top: 22px;
+}
+
+.region-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.region-title .visual-icon {
+  width: 58px;
+  height: 58px;
+}
+
+.region-title b {
+  display: block;
+  font-size: 21px;
+}
+
+.az-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.az-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.az-card .visual-icon {
+  width: 62px;
+  height: 62px;
+}
+
+.az-link {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.az-link i {
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--blue) 0 9px, transparent 9px 15px);
+}
+
+.ha-visual {
+  display: grid;
+  justify-items: center;
+}
+
+.traffic-source {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.traffic-source .visual-icon {
+  width: 58px;
+  height: 58px;
+}
+
+.traffic-split {
+  position: relative;
+  margin: 14px 0 28px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.traffic-split::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: min(46vw, 500px);
+  height: 32px;
+  transform: translateX(-50%);
+  border: 2px solid var(--blue);
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.ha-targets {
+  width: min(760px, 100%);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.ha-targets .failed {
+  border-color: #e8a0a6;
+  background: #fff6f7;
+}
+
+.ha-targets .failed .visual-icon {
+  color: var(--red);
+  border-color: #e8a0a6;
+  background: #ffedef;
+}
+
+.ha-targets .failed::after {
+  content: "×";
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  color: var(--red);
+  font-size: 30px;
+  font-weight: 950;
+}
+
+.ha-targets .healthy {
+  border-color: #78c6ad;
+  background: #f2fbf7;
+}
+
+.ha-targets .healthy .visual-icon {
+  color: var(--green);
+  border-color: #78c6ad;
+  background: #e6f5ef;
+}
+
+.service-state {
+  margin-top: 18px;
+  padding: 9px 17px;
+  border-radius: 999px;
+  background: #e6f5ef;
+  color: #08634c;
+}
+
+.request-route {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 9px;
+}
+
+.request-route .diagram-node {
+  padding: 16px 12px;
+}
+
+.request-route .diagram-node b {
+  font-size: 16px;
+}
+
+.request-route .diagram-node .visual-icon {
+  width: 58px;
+  height: 58px;
+}
+
+.route-line {
+  position: relative;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.route-line::after {
+  content: "→";
+  display: block;
+  color: var(--orange);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.route-line.return::after {
+  content: "←";
+}
+
+.s3-visual {
+  display: grid;
+  grid-template-columns: .85fr 1.4fr;
+  gap: 22px;
+  align-items: center;
+}
+
+.bucket-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.bucket-shell .visual-icon {
+  width: 108px;
+  height: 108px;
+  border-radius: 28px;
+}
+
+.bucket-shell .visual-icon svg {
+  width: 72px;
+  height: 72px;
+}
+
+.object-stack {
+  display: grid;
+  gap: 9px;
+}
+
+.object-stack article {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  grid-template-areas: "icon title" "icon copy";
+  column-gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.object-stack .visual-icon {
+  grid-area: icon;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+}
+
+.object-stack .visual-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.object-stack b {
+  grid-area: title;
+}
+
+.object-stack small {
+  grid-area: copy;
+}
+
+.concept-key {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.dark .visual-stage {
+  background: linear-gradient(135deg, #101d2d, var(--paper));
+}
+
+.dark .visual-icon {
+  background: #2b251e;
+}
+
+.dark .ha-targets .failed {
+  background: #351b21;
+}
+
+.dark .ha-targets .healthy {
+  background: #133429;
+}
+
+.dark .service-state {
+  background: #173c32;
+  color: #b9f1da;
+}
+
+.presenting .visual-card {
+  min-height: 250px;
+}
+
+.presenting .visual-icon {
+  width: 82px;
+  height: 82px;
+}
+
+.presenting .visual-icon svg {
+  width: 54px;
+  height: 54px;
+}
+
+.presenting .visual-stage {
+  margin-top: 32px;
+}
+
+.presenting .diagram-node b {
+  font-size: clamp(20px, 1.8vw, 28px);
+}
+
+.presenting .diagram-node small,
+.presenting .az-card small,
+.presenting .region-title small,
+.presenting .bucket-shell small,
+.presenting .object-stack small {
+  font-size: clamp(14px, 1.15vw, 18px);
+}
+
+@media (max-width: 900px) {
+  .infra-zoom,
+  .service-route {
+    grid-template-columns: 1fr;
+  }
+
+  .diagram-arrow {
+    transform: rotate(90deg);
+  }
+
+  .region-criteria,
+  .concept-key {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .request-route {
+    grid-template-columns: 1fr;
+  }
+
+  .route-line {
+    text-align: center;
+  }
+
+  .route-line::after {
+    transform: rotate(90deg);
+  }
+
+  .s3-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .traffic-split::after {
+    width: 70vw;
+  }
+
+  .presenting .visual-stage {
+    overflow: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .region-criteria,
+  .concept-key,
+  .az-grid,
+  .ha-targets {
+    grid-template-columns: 1fr;
+  }
+
+  .traffic-split::after {
+    display: none;
+  }
+
+  .visual-card {
+    min-height: 0;
+  }
+
+  .visual-stage,
+  .presenting .visual-stage {
+    padding: 18px;
+    border-radius: 14px;
+  }
+}
+
+@media print {
+  .visual-stage,
+  .visual-card {
+    break-inside: avoid;
+  }
+}
+
+/* 발표 모드에서 S3 객체 목록의 작은 아이콘이 본문을 침범하지 않도록 크기를 고정 */
+.presenting .object-stack article {
+  min-height: 94px;
+  grid-template-columns: 64px minmax(0, 1fr);
+}
+
+.presenting .object-stack .visual-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.presenting .object-stack .visual-icon svg {
+  width: 38px;
+  height: 38px;
+}
+
+.presenting .object-stack b,
+.presenting .object-stack small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* 실습 단계의 흰색 표시는 입력란이 아니라 단계 완료 후 확인할 결과임을 명시 */
+.result {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #a8d5c6;
+  background: #eff9f5;
+}
+
+.result::before {
+  content: "확인 결과";
+  padding-right: 7px;
+  border-right: 1px solid #a8d5c6;
+  color: var(--green);
+  font-size: .9em;
+  font-weight: 950;
+}
+
+.presenting .result {
+  padding: 7px 10px;
+  font-size: clamp(13px, 1vw, 16px);
+}
+
+.dark .result {
+  border-color: #357c68;
+  background: #173c32;
+  color: #c8f3e3;
+}
+
+.dark .result::before {
+  border-color: #357c68;
+  color: #77d7b7;
+}
+
+.practice-only .lesson.active::before {
+  content: "실습 화면만 표시 중 · 전체 강의를 보려면 상단의 ‘전체 보기’를 선택하세요.";
+  display: block;
+  margin-bottom: 14px;
+  padding: 11px 15px;
+  border-left: 5px solid var(--orange);
+  background: var(--orange2);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.presenting.practice-only .lesson.active::before {
+  display: none;
+}
+
+@media print {
+  .practice-only .lesson.active::before {
+    display: none;
+  }
+}
+
+/* VPC와 서버 구조를 실제 연결 관계로 표현하는 강의용 다이어그램 */
+.vpc-map {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px;
+  gap: 22px;
+  align-items: center;
+}
+
+.vpc-boundary {
+  padding: 18px;
+  border: 2px solid var(--blue);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--blue) 5%, var(--paper));
+}
+
+.vpc-boundary > b {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 20px;
+}
+
+.subnet-block {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) minmax(130px, .45fr);
+  gap: 14px;
+  align-items: center;
+  padding: 18px;
+  border: 1px dashed var(--blue);
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+.subnet-block small,
+.gateway-node small,
+.mini-instance small,
+.security-flow small,
+.diag-stack small,
+.architecture-final small,
+.cleanup-flow small {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.mini-instance,
+.gateway-node {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.mini-instance .visual-icon,
+.gateway-node .visual-icon {
+  width: 58px;
+  height: 58px;
+}
+
+.mini-instance.selected {
+  border: 1px solid var(--line);
+}
+
+.security-flow {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  grid-template-areas:
+    "web gate server"
+    "admin gate server";
+  gap: 14px;
+  align-items: center;
+}
+
+.security-client,
+.security-gate,
+.security-server {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.security-client { grid-area: web; }
+.security-client.admin { grid-area: admin; }
+.security-gate {
+  grid-area: gate;
+  border: 2px solid var(--blue);
+}
+.security-server { grid-area: server; }
+
+.security-flow > div {
+  position: relative;
+}
+
+.security-client::after,
+.security-gate::after {
+  content: "→";
+  position: absolute;
+  right: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--orange);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.diag-stack {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.diag-stack > div {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.architecture-final {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 150px;
+  gap: 18px;
+  align-items: center;
+}
+
+.arch-user,
+.arch-dev {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.arch-vpc {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 18px;
+  border: 2px solid var(--blue);
+  border-radius: 18px;
+}
+
+.arch-vpc > b,
+.arch-subnet {
+  grid-column: 1 / -1;
+}
+
+.arch-vpc > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.arch-vpc .visual-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
+}
+
+.arch-subnet {
+  flex-wrap: wrap;
+  border-style: dashed !important;
+}
+
+.arch-subnet > b {
+  width: 100%;
+}
+
+.cleanup-flow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 9px;
+}
+
+.cleanup-flow > div {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+  padding: 15px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.cleanup-flow span {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 900;
+}
+
+.presenting .slide {
+  width: 100%;
+  height: 100dvh;
+  padding-bottom: 92px;
+}
+
+.presenting .flow > div,
+.presenting .card {
+  min-width: 0;
+}
+
+.presenting .table {
+  max-height: 52vh;
+}
+
+@media (max-width: 1000px) {
+  .vpc-map,
+  .architecture-final {
+    grid-template-columns: 1fr;
+  }
+
+  .security-flow {
+    grid-template-columns: 1fr;
+    grid-template-areas: "web" "admin" "gate" "server";
+  }
+
+  .security-client::after,
+  .security-gate::after {
+    display: none;
+  }
+
+  .diag-stack {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cleanup-flow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .subnet-block,
+  .diag-stack,
+  .cleanup-flow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .presenting .slide.current .vpc-boundary,
+  .presenting .slide.current .security-gate,
+  .presenting .slide.current .arch-vpc {
+    animation: nodeIn .5s .18s both;
+  }
+
+  .presenting .slide.current .subnet-block,
+  .presenting .slide.current .security-server,
+  .presenting .slide.current .arch-subnet {
+    animation: nodeIn .5s .48s both;
+  }
+
+  .presenting .slide.current .mini-instance,
+  .presenting .slide.current .gateway-node,
+  .presenting .slide.current .security-client,
+  .presenting .slide.current .arch-user,
+  .presenting .slide.current .arch-dev {
+    animation: iconPop .5s .78s both;
+  }
+
+  .presenting .slide.current .diag-stack > div,
+  .presenting .slide.current .cleanup-flow > div {
+    animation: copyIn .38s both;
+  }
+
+  .presenting .slide.current .diag-stack > div:nth-child(2),
+  .presenting .slide.current .cleanup-flow > div:nth-child(2) { animation-delay: .12s; }
+  .presenting .slide.current .diag-stack > div:nth-child(3),
+  .presenting .slide.current .cleanup-flow > div:nth-child(3) { animation-delay: .24s; }
+  .presenting .slide.current .diag-stack > div:nth-child(4),
+  .presenting .slide.current .cleanup-flow > div:nth-child(4) { animation-delay: .36s; }
+  .presenting .slide.current .diag-stack > div:nth-child(5),
+  .presenting .slide.current .cleanup-flow > div:nth-child(5) { animation-delay: .48s; }
+  .presenting .slide.current .cleanup-flow > div:nth-child(6) { animation-delay: .60s; }
+}
