@@ -1,7 +1,7 @@
 .card,.hero li,.navlesson,.tools button{transition:transform .2s ease,border-color .2s ease,background .2s ease}
 .card:hover,.hero li:hover{transform:translateY(-3px);border-color:#ffb84d}
 .presenting .slide.current{animation:slideIn .28s ease both}
-@keyframes slideIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes slideIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.card,.hero li,.navlesson,.tools button{transition:none}.presenting .slide.current{animation:none}}
 .visual-card .visual-icon,.diagram-node .visual-icon,.az-card .visual-icon,.bucket-shell .visual-icon{transition:transform .28s ease,box-shadow .28s ease}
 .visual-card:hover .visual-icon,.diagram-node:hover .visual-icon,.az-card:hover .visual-icon{transform:translateY(-4px) rotate(-2deg);box-shadow:0 12px 24px rgba(255,153,0,.18)}
