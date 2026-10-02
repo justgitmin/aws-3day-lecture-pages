@@ -578,6 +578,39 @@
   font-size: clamp(13px, 1vw, 16px);
 }
 
+/* 발표 화면에서는 실습 단계를 두 열로 정리해 스크롤과 겹침을 줄임 */
+.presenting .steps {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+  margin: 18px 0;
+}
+
+.presenting .step {
+  min-width: 0;
+  padding: 12px 14px 12px 58px;
+  border: 1px solid var(--line);
+  background: var(--soft);
+}
+
+.presenting .step::before {
+  left: 10px;
+  top: 12px;
+}
+
+.presenting .step:not(:last-child)::after {
+  display: none;
+}
+
+.presenting .step h3 {
+  margin-bottom: 2px;
+  font-size: clamp(16px, 1.3vw, 21px);
+}
+
+.presenting .step p {
+  font-size: clamp(14px, 1.05vw, 18px);
+  line-height: 1.5;
+}
+
 .dark .result {
   border-color: #357c68;
   background: #173c32;
