@@ -5,8 +5,8 @@ window.COURSE_META = {
   "eyebrow": "DIAGNOSE · COMPARE · CLEANUP",
   "heading": "웹서비스 장애를 진단하고,",
   "headingAccent": "AWS 자원을 안전하게 정리합니다.",
-  "description": "네트워크, 보안 그룹, Nginx, 파일과 로그를 기준으로 장애를 진단하고 EC2와 S3 배포 방식을 비교한 뒤 비용이 발생하는 실습 자원을 정리합니다.",
-  "sideCopy": "장애 분석, S3 비교, 최종 검증과 자원 정리를 진행합니다.",
+  "description": "네트워크, 보안 그룹, Nginx, 파일과 로그를 기준으로 장애를 진단하고 전체 정적 웹 프로젝트를 S3 웹사이트로 배포한 뒤 비용이 발생하는 실습 자원을 정리합니다.",
+  "sideCopy": "장애 분석, S3 정적 웹 호스팅, 최종 검증과 자원 정리를 진행합니다.",
   "statA": "LOG",
   "statACopy": "증거 기반 장애 분석",
   "statB": "CLEAN",
@@ -21,8 +21,8 @@ window.COURSE_META = {
       "systemctl, curl, ss와 Nginx 로그로 원인을 찾습니다."
     ],
     [
-      "배포 비교",
-      "EC2와 S3 정적 웹사이트의 운영 책임을 비교합니다."
+      "S3 웹 호스팅",
+      "전체 프로젝트를 S3 정적 웹사이트로 배포하고 검증합니다."
     ],
     [
       "자원 정리",
@@ -85,46 +85,47 @@ window.COURSE = [
     "day": 3,
     "id": "d3l2",
     "period": "2교시",
-    "title": "Amazon S3와 EC2 배포 비교",
-    "subtitle": "같은 정적 웹페이지를 기준으로 객체 스토리지와 가상 서버의 역할, 운영 범위와 선택 기준을 비교합니다.",
+    "title": "Amazon S3 정적 웹사이트 배포",
+    "subtitle": "HTML·CSS·JavaScript·이미지의 폴더 구조를 유지하여 전체 프로젝트를 S3 웹사이트로 배포합니다.",
     "plan": [
-      "S3 개념 8분",
-      "구조와 권한 10분",
-      "배포 비교 12분",
-      "선택 실습 15분",
-      "판단 정리 5분"
+      "구조 점검 8분",
+      "버킷·업로드 12분",
+      "호스팅·권한 12분",
+      "접속·오류 해결 13분",
+      "EC2 비교 5분"
     ],
     "slides": [
       {
-        "title": "같은 웹페이지도 다른 서비스로 제공할 수 있습니다",
-        "lead": "정적 파일만 필요한지, 서버 프로그램과 운영체제 제어가 필요한지에 따라 선택합니다.",
-        "body": "<div class=\"compare\"><article><span class=\"visual-icon\" data-icon=\"bucket\"></span><h3>Amazon S3 정적 웹사이트</h3><ul><li>정적 파일 제공</li><li>운영체제와 웹 서버 관리 없음</li><li>서버 측 프로그램 직접 실행 불가</li></ul></article><mark>VS</mark><article><span class=\"visual-icon\" data-icon=\"server\"></span><h3>Amazon EC2 + Nginx</h3><ul><li>정적·동적 콘텐츠 제공 가능</li><li>운영체제와 웹 서버 직접 관리</li><li>패치·로그·보안 책임 확대</li></ul></article></div>"
+        "title": "S3에는 웹 프로젝트 전체를 배포합니다",
+        "lead": "index.html이 참조하는 CSS·JavaScript·이미지가 함께 있어야 브라우저가 완성된 화면을 구성할 수 있습니다.",
+        "body": "<div class=\"compare\"><article><span class=\"visual-icon\" data-icon=\"file\"></span><h3>index.html만 업로드</h3><ul><li>HTML 글자는 표시될 수 있습니다.</li><li>CSS·JavaScript·이미지 요청은 404가 됩니다.</li><li>기능과 디자인이 깨진 불완전한 배포입니다.</li></ul></article><mark>→</mark><article><span class=\"visual-icon\" data-icon=\"bucket\"></span><h3>프로젝트 전체 업로드</h3><ul><li>index.html과 error.html</li><li>css·js·images 폴더</li><li>HTML에 연결된 모든 정적 파일</li></ul></article></div><div class=\"callout\"><b>배포 기준</b><br>로컬에서 열리는 파일을 모두 올리는 것이 아니라, 웹페이지가 실제로 참조하는 파일과 폴더를 빠짐없이 동일한 상대경로로 업로드합니다.</div>"
       },
       {
-        "title": "S3는 데이터를 객체 단위로 저장합니다",
-        "lead": "버킷은 객체를 담는 최상위 컨테이너이고 키는 객체를 구분하는 전체 이름입니다.",
-        "body": "<div class=\"visual-stage s3-visual\"><div class=\"bucket-shell\"><span data-icon=\"bucket\"></span><b>cloud-site-student01</b><small>고유한 이름과 리전</small></div><div class=\"object-stack\"><article><span data-icon=\"file\"></span><b>index.html</b><small>키: index.html</small></article><article><span data-icon=\"palette\"></span><b>style.css</b><small>키: css/style.css</small></article><article><span data-icon=\"object\"></span><b>profile.webp</b><small>키: images/profile.webp</small></article></div></div><div class=\"concept-key\"><span><b>버킷</b>객체의 최상위 공간</span><span><b>객체</b>데이터와 메타데이터</span><span><b>키</b>객체의 전체 이름</span></div>"
+        "title": "로컬 폴더 구조와 S3 객체 키를 일치시킵니다",
+        "lead": "S3의 폴더는 실제 디렉터리가 아니라 객체 키의 접두사이며 대소문자를 구분합니다.",
+        "body": "<div class=\"visual-stage s3-visual\"><div class=\"bucket-shell\"><span data-icon=\"folder\"></span><b>cloud-portfolio</b><small>로컬 프로젝트 폴더</small></div><div class=\"object-stack\"><article><span data-icon=\"file\"></span><b>index.html</b><small>키: index.html</small></article><article><span data-icon=\"file\"></span><b>error.html</b><small>키: error.html</small></article><article><span data-icon=\"palette\"></span><b>style.css</b><small>키: css/style.css</small></article><article><span data-icon=\"code\"></span><b>app.js</b><small>키: js/app.js</small></article><article><span data-icon=\"object\"></span><b>profile.webp</b><small>키: images/profile.webp</small></article></div></div><div class=\"callout warn\"><b>프로젝트 폴더 자체를 한 단계 더 올리지 않습니다.</b><br>버킷 루트에 cloud-portfolio/index.html이 아니라 index.html이 보여야 웹사이트 루트 주소가 정상적으로 열립니다.</div>"
       },
       {
-        "title": "EC2와 S3는 관리 책임과 기능 범위가 다릅니다",
-        "lead": "단순함이 항상 우수한 것은 아니며 필요한 기능과 운영 능력을 기준으로 선택합니다.",
-        "body": "<div class=\"table\"><table><thead><tr><th>항목</th><th>S3 정적 웹사이트</th><th>EC2 + Nginx</th></tr></thead><tbody><tr><td>운영체제</td><td>관리하지 않음</td><td>패치·계정·서비스 관리</td></tr><tr><td>서버 코드</td><td>직접 실행 불가</td><td>Node.js·Java·Python 등 가능</td></tr><tr><td>확장</td><td>서비스가 처리</td><td>인스턴스·LB 설계</td></tr><tr><td>보안</td><td>버킷 정책 등</td><td>SG·OS·Nginx·앱</td></tr><tr><td>활용</td><td>소개·문서·정적 자산</td><td>API·백엔드·커스텀 환경</td></tr></tbody></table></div>"
+        "title": "업로드 전에 프로젝트를 배포 가능한 상태로 점검합니다",
+        "lead": "깨진 경로와 누락 파일을 먼저 수정하면 S3 권한 문제와 콘텐츠 문제를 분리하여 확인할 수 있습니다.",
+        "body": "<pre><code>cloud-portfolio/\n├─ index.html\n├─ error.html\n├─ css/\n│  └─ style.css\n├─ js/\n│  └─ app.js\n└─ images/\n   └─ profile.webp</code><button class=\"copy\">복사</button></pre><div class=\"check\"><label><input type=\"checkbox\">index.html과 error.html 파일명이 모두 소문자입니다.</label><label><input type=\"checkbox\">HTML의 CSS 경로가 ./css/style.css와 일치합니다.</label><label><input type=\"checkbox\">HTML의 JavaScript 경로가 ./js/app.js와 일치합니다.</label><label><input type=\"checkbox\">이미지 경로와 실제 파일명·확장자·대소문자가 일치합니다.</label><label><input type=\"checkbox\">로컬 브라우저의 Console과 Network에 404 오류가 없습니다.</label><label><input type=\"checkbox\">비밀번호·액세스 키·개인정보가 파일에 포함되지 않았습니다.</label></div><div class=\"callout\"><b>error.html이 없다면 생성합니다.</b><br>존재하지 않는 주소를 요청했을 때 표시할 간단한 안내와 index.html로 돌아가는 링크를 작성합니다.</div>"
       },
       {
-        "title": "S3 공개 읽기는 GetObject만 허용합니다",
-        "lead": "웹 콘텐츠 전용 버킷에 읽기만 허용하고 업로드·수정·삭제 권한은 공개하지 않습니다.",
-        "body": "<pre><code>{\n  &quot;Version&quot;: &quot;2012-10-17&quot;,\n  &quot;Statement&quot;: [{\n    &quot;Effect&quot;: &quot;Allow&quot;,\n    &quot;Principal&quot;: &quot;*&quot;,\n    &quot;Action&quot;: &quot;s3:GetObject&quot;,\n    &quot;Resource&quot;: &quot;arn:aws:s3:::YOUR-BUCKET-NAME/*&quot;\n  }]\n}</code><button class=\"copy\">복사</button></pre><div class=\"callout danger\"><b>민감한 파일을 공개 버킷에 업로드하지 않습니다.</b><br>정적 웹사이트 설정은 인터넷 사용자가 객체를 읽을 수 있게 하므로 웹 콘텐츠만 저장합니다.</div>"
-      },
-      {
-        "title": "선택 실습: 같은 프로젝트를 S3에 배포합니다",
-        "lead": "EC2 결과와 비교하기 위해 같은 정적 프로젝트를 별도의 S3 버킷에 배포합니다.",
-        "body": "<div class=\"steps\"><div class=\"step\"><h3>버킷 생성</h3><p>고유한 영문 이름과 서울 리전을 선택합니다.</p><span class=\"result\">버킷 표시</span></div><div class=\"step\"><h3>프로젝트 업로드</h3><p>index.html이 버킷 루트에 있도록 업로드합니다.</p><span class=\"result\">객체 키 확인</span></div><div class=\"step\"><h3>정적 웹사이트</h3><p>인덱스 문서를 index.html로 설정합니다.</p><span class=\"result\">엔드포인트 생성</span></div><div class=\"step\"><h3>공개 읽기</h3><p>실습 지침에 따라 GetObject 정책을 적용합니다.</p><span class=\"result\">공개 경고 확인</span></div><div class=\"step\"><h3>접속 확인</h3><p>웹사이트 엔드포인트에서 하위 파일까지 확인합니다.</p><span class=\"result\">EC2와 동일 화면</span></div><div class=\"step\"><h3>차이 기록</h3><p>주소·설정·운영 범위·HTTPS 차이를 정리합니다.</p><span class=\"result\">비교표 완성</span></div></div>",
+        "title": "버킷을 만든 뒤 프로젝트 내용을 루트에 업로드합니다",
+        "lead": "서울 리전의 일반 목적 버킷을 만들고 index.html과 하위 폴더가 올바른 키로 저장되었는지 확인합니다.",
+        "body": "<div class=\"steps\"><div class=\"step\"><h3>S3 이동</h3><p>AWS 콘솔에서 S3 → 일반 목적 버킷 → 버킷 만들기를 선택합니다.</p><span class=\"result\">생성 화면</span></div><div class=\"step\"><h3>이름·리전</h3><p>전 세계에서 고유한 lab-site-학번-임의문자 이름과 아시아 태평양(서울) ap-northeast-2를 선택합니다.</p><span class=\"result\">이름·리전 확인</span></div><div class=\"step\"><h3>소유권</h3><p>객체 소유권은 ACL 비활성화(권장)를 유지합니다.</p><span class=\"result\">Bucket owner enforced</span></div><div class=\"step\"><h3>초기 보안</h3><p>업로드하는 동안 퍼블릭 액세스 차단은 켠 상태로 버킷을 만듭니다.</p><span class=\"result\">버킷 생성</span></div><div class=\"step\"><h3>업로드 시작</h3><p>버킷 → 객체 → 업로드를 선택합니다.</p><span class=\"result\">업로드 화면</span></div><div class=\"step\"><h3>내용 추가</h3><p>파일 추가로 index.html·error.html, 폴더 추가로 css·js·images를 선택합니다.</p><span class=\"result\">전체 항목 표시</span></div><div class=\"step\"><h3>업로드 완료</h3><p>업로드를 실행하고 실패 항목이 0개인지 확인합니다.</p><span class=\"result\">성공</span></div><div class=\"step\"><h3>키 검증</h3><p>버킷 루트에 index.html이 있고 css/style.css 등의 키가 보이는지 확인합니다.</p><span class=\"result\">구조 일치</span></div></div>",
         "kind": "practice"
       },
       {
-        "title": "요구사항에 따라 배포 서비스를 선택합니다",
-        "lead": "서버를 사용할 수 있다는 이유가 아니라 필요한 기능과 관리 책임을 기준으로 판단합니다.",
-        "body": "<div class=\"table\"><table><thead><tr><th>요구사항</th><th>우선 선택</th><th>이유</th></tr></thead><tbody><tr><td>동아리 소개 정적 사이트</td><td>S3 + CloudFront 검토</td><td>서버 코드가 필요 없음</td></tr><tr><td>Python API</td><td>EC2 또는 관리형 컴퓨팅</td><td>실행 환경 필요</td></tr><tr><td>이미지 원본 저장</td><td>S3</td><td>객체 단위 저장</td></tr><tr><td>특정 Linux 설정</td><td>EC2</td><td>운영체제 제어 필요</td></tr></tbody></table></div><div class=\"check\"><label><input type=\"checkbox\">S3의 버킷·객체·키를 구분할 수 있습니다.</label><label><input type=\"checkbox\">EC2와 S3의 운영 책임을 비교할 수 있습니다.</label><label><input type=\"checkbox\">공개 읽기와 공개 쓰기의 차이를 설명할 수 있습니다.</label><label><input type=\"checkbox\">요구사항에 맞는 배포 방식을 선택할 수 있습니다.</label></div>",
+        "title": "정적 웹 호스팅과 공개 읽기 권한을 설정합니다",
+        "lead": "웹사이트 기능을 활성화한 뒤 인터넷 사용자가 웹 콘텐츠 객체만 읽을 수 있도록 설정합니다.",
+        "body": "<div class=\"steps\"><div class=\"step\"><h3>호스팅 활성화</h3><p>속성 → 정적 웹 사이트 호스팅 → 편집 → 활성화를 선택합니다.</p><span class=\"result\">정적 웹사이트 호스팅</span></div><div class=\"step\"><h3>문서 지정</h3><p>호스팅 유형은 정적 웹 사이트, 인덱스 문서는 index.html, 오류 문서는 error.html로 저장합니다.</p><span class=\"result\">엔드포인트 생성</span></div><div class=\"step\"><h3>버킷 차단 수정</h3><p>권한 → 퍼블릭 액세스 차단 → 편집에서 이 실습 버킷의 모든 퍼블릭 액세스 차단을 해제하고 확인 문구를 입력합니다.</p><span class=\"result\">버킷 공개 경고</span></div><div class=\"step\"><h3>정책 편집</h3><p>권한 → 버킷 정책 → 편집에서 아래 GetObject 정책을 붙여 넣고 버킷 이름을 바꿉니다.</p><span class=\"result\">정책 저장</span></div><div class=\"step\"><h3>엔드포인트 접속</h3><p>속성의 정적 웹 사이트 호스팅 영역에서 버킷 웹 사이트 엔드포인트를 엽니다.</p><span class=\"result\">전체 화면 표시</span></div></div><pre><code>{\n  &quot;Version&quot;: &quot;2012-10-17&quot;,\n  &quot;Statement&quot;: [{\n    &quot;Sid&quot;: &quot;PublicReadForWebsite&quot;,\n    &quot;Effect&quot;: &quot;Allow&quot;,\n    &quot;Principal&quot;: &quot;*&quot;,\n    &quot;Action&quot;: &quot;s3:GetObject&quot;,\n    &quot;Resource&quot;: &quot;arn:aws:s3:::YOUR-BUCKET-NAME/*&quot;\n  }]\n}</code><button class=\"copy\">복사</button></pre><div class=\"callout danger\"><b>공개되는 범위는 웹 콘텐츠 객체 읽기입니다.</b><br>정책에 PutObject·DeleteObject를 추가하지 않고 민감한 파일을 이 버킷에 업로드하지 않습니다.</div>",
+        "kind": "practice"
+      },
+      {
+        "title": "웹사이트 엔드포인트에서 전체 파일과 오류를 검증합니다",
+        "lead": "첫 화면만 확인하지 않고 CSS·JavaScript·이미지와 오류 문서까지 요청 상태를 확인합니다.",
+        "body": "<div class=\"table\"><table><thead><tr><th>증상</th><th>확인 위치</th><th>수정 기준</th></tr></thead><tbody><tr><td>403 Access Denied</td><td>버킷 퍼블릭 액세스 차단·버킷 정책</td><td>GetObject와 버킷 ARN 확인</td></tr><tr><td>404 NoSuchKey</td><td>객체 키·파일명·대소문자</td><td>index.html을 루트에 배치</td></tr><tr><td>HTML만 표시</td><td>브라우저 Network의 CSS·JS·이미지</td><td>하위 폴더 전체 업로드</td></tr><tr><td>Object URL만 열림</td><td>접속한 주소</td><td>속성의 웹사이트 엔드포인트 사용</td></tr><tr><td>HTTPS 필요</td><td>S3 웹사이트 엔드포인트 제한</td><td>CloudFront·Amplify Hosting 검토</td></tr></tbody></table></div><div class=\"check\"><label><input type=\"checkbox\">버킷 루트에 index.html과 error.html이 있습니다.</label><label><input type=\"checkbox\">css·js·images 폴더의 객체 키가 로컬 경로와 일치합니다.</label><label><input type=\"checkbox\">웹사이트 엔드포인트에서 디자인과 기능이 정상입니다.</label><label><input type=\"checkbox\">Network에서 주요 파일의 응답이 200입니다.</label><label><input type=\"checkbox\">존재하지 않는 주소에서 error.html이 표시됩니다.</label><label><input type=\"checkbox\">공개 정책에는 s3:GetObject만 있습니다.</label><label><input type=\"checkbox\">EC2와 S3의 기능과 운영 책임 차이를 설명할 수 있습니다.</label></div><div class=\"callout\"><b>비교 결과</b><br>S3는 정적 파일 제공에 적합하고 서버 측 프로그램은 실행하지 않습니다. API·백엔드·운영체제 제어가 필요하면 EC2 또는 다른 컴퓨팅 서비스를 사용합니다.</div>",
         "kind": "summary"
       }
     ]
@@ -173,7 +174,7 @@ window.COURSE = [
       {
         "title": "3일 과정의 학습 결과를 확인합니다",
         "lead": "각 항목을 직접 수행하고 이유를 설명할 수 있다면 인프라 구축부터 배포와 운영까지의 기본 흐름을 완성한 것입니다.",
-        "body": "<div class=\"check\"><label><input type=\"checkbox\">리전·가용 영역·VPC·서브넷의 관계를 설명할 수 있습니다.</label><label><input type=\"checkbox\">IGW와 라우팅 테이블로 퍼블릭 경로를 구성할 수 있습니다.</label><label><input type=\"checkbox\">최소 범위의 보안 그룹 규칙을 만들 수 있습니다.</label><label><input type=\"checkbox\">Ubuntu Server 26.04 LTS EC2에 Nginx를 설치할 수 있습니다.</label><label><input type=\"checkbox\">Kiro로 정적 웹 프로젝트를 만들고 검토할 수 있습니다.</label><label><input type=\"checkbox\">SCP와 rsync로 배포와 재배포를 수행할 수 있습니다.</label><label><input type=\"checkbox\">로그와 명령으로 접속 장애를 진단할 수 있습니다.</label><label><input type=\"checkbox\">EC2와 S3 배포 방식의 차이를 설명할 수 있습니다.</label><label><input type=\"checkbox\">비용 발생 자원을 확인하고 안전하게 삭제했습니다.</label></div><div class=\"question\"><b>최종 설명</b><br>“브라우저에 EC2 공개 IP를 입력했을 때 화면이 나타나기까지”를 VPC, 라우팅, 보안 그룹, EC2와 Nginx를 포함하여 설명합니다.</div>",
+        "body": "<div class=\"check\"><label><input type=\"checkbox\">리전·가용 영역·VPC·서브넷의 관계를 설명할 수 있습니다.</label><label><input type=\"checkbox\">IGW와 라우팅 테이블로 퍼블릭 경로를 구성할 수 있습니다.</label><label><input type=\"checkbox\">최소 범위의 보안 그룹 규칙을 만들 수 있습니다.</label><label><input type=\"checkbox\">Ubuntu Server 26.04 LTS EC2에 Nginx를 설치할 수 있습니다.</label><label><input type=\"checkbox\">Kiro로 정적 웹 프로젝트를 만들고 검토할 수 있습니다.</label><label><input type=\"checkbox\">SCP와 rsync로 EC2 배포와 재배포를 수행할 수 있습니다.</label><label><input type=\"checkbox\">로그와 명령으로 접속 장애를 진단할 수 있습니다.</label><label><input type=\"checkbox\">HTML·CSS·JavaScript·이미지 전체를 S3 정적 웹사이트로 배포할 수 있습니다.</label><label><input type=\"checkbox\">EC2와 S3의 기능과 운영 책임 차이를 설명할 수 있습니다.</label><label><input type=\"checkbox\">비용 발생 자원을 확인하고 안전하게 삭제했습니다.</label></div><div class=\"question\"><b>최종 설명</b><br>같은 웹 프로젝트가 EC2+Nginx와 S3 웹사이트 엔드포인트에서 제공되는 과정을 비교하여 설명합니다.</div>",
         "kind": "summary"
       }
     ]
